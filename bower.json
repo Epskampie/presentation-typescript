@@ -1,0 +1,7 @@
+{
+  "name": "presentation-grunt-js-task-runner",
+  "version": "0.0.0",
+  "dependencies": {
+    "prism": "gh-pages"
+  }
+}
