@@ -12,173 +12,253 @@ html
     article
 
       section
-        h1 Gulp: JS build system
+        h1 typescript:
+        h2 javascript + static types
 
-      //- section
-      //-   h2 Keyboard Interaction
-      //-   h3 Powered by <a href="https://github.com/markdalgleish/bespoke-keys">bespoke-keys</a>
-
-      //- section
-      //-   h2 Touch Interaction
-      //-   h3 Powered by <a href="https://github.com/markdalgleish/bespoke-touch">bespoke-touch</a>
-
-      //- section
-      //-   h2 Responsive Slides
-      //-   h3 Powered by <a href="https://github.com/markdalgleish/bespoke-scale">bespoke-scale</a>
-
-      //- section
-      //-   h2 Bullet List
-      //-   h3.bullet Powered by <a href="https://github.com/markdalgleish/bespoke-bullets">bespoke-bullets</a>
-      //-   ul
-      //-     li Bullet 1
-      //-     li Bullet 2
-      //-     li Bullet 3
-
-      //- section
-      //-   h2 Syntax Highlighting
-      //-   h3 Powered by <a href="http://twitter.com/LeaVerou">Lea Verou</a>'s <a href="https://github.com/LeaVerou/prism">Prism</a>
-      //-   pre
-      //-     code.language-javascript.
-      //-       bespoke.from('article', [
-      //-         classes(),
-      //-         keys(),
-      //-         touch(),
-      //-         bullets('li, .bullet')
-      //-       ]);
-
-      //- section(data-bespoke-hash='named-route')
-      //-   h2 Named Route
-      //-   h3 Powered by <a href="https://github.com/markdalgleish/bespoke-hash">bespoke-hash</a>
-      //-   p Look up! This route has been named with a <em>'data-bespoke-hash'</em> attribute.
-
-      //- section
-      //-   h2.bullet Just the beginning...
-      //-   br
-      //-   ul
-      //-     li Edit <a href="http://jade-lang.com/">Jade</a> markup in <em>'src/index.jade'</em>
-      //-     li Edit <a href="http://learnboost.github.io/stylus/">Stylus</a> styles in <em>'src/styles/main.styl'</em>
-      //-     li Edit JavaScript in <em>'src/scripts/main.js'</em>
-      //-   br
-      //-   ul
-      //-     li
-      //-       strong Enjoy! :)
-      //-       a(href='http://twitter.com/markdalgleish')  -@markdalgleish
-            
       section
-        h1.bullet Wat is gulp?
+        h1 Wat is typescript?
         br
-        ul
-          li Javascript build system
+        ul.text-align-left.bullets
           li
-            <img src="https://raw.githubusercontent.com/gulpjs/artwork/master/gulp-2x.png" height="200px">
-            
-      section
-        h2.bullet Plugins:
-        br
-        ul
-          li gulp-less
-          li gulp-autoprefixer
-          li gulp-concat
-          li gulp-uglify
-        ul
-          li css-sprite
+            b Syntax
+          li Standaard javascript (es6)
+          li + manieren om types te definieren
+          li 
+           b Compiler
+          li Checkt types, geeft errors 
+            span.red compile-time checking!
+          li Converteerd desgewenst naar ES5
+          li Kan los gebruikt worden, maar ook in gulp
+          li
+            b Autocomplete in editor
+          li VS Code
       
-      section
-        h2 Less
-        pre.medium
-          code.language-less.
-            @fugroBlauw: #f938ab;
-            @import "import/font_sizes.less";
-
-            .header {
-              background-color: @fugroBlauw;
-              
-              .menu {
-                font-size: @headerSize + 2px;
+      section.medium
+        h1 syntax ES6
+        div.columns.small.text-align-left.bullets
+          div
+            pre.small
+              code.language-javascript.
+                export default class Vec2 {
+                    constructor(x = 0, y = 0) {
+                        this.x = x;
+                        this.y = y;
+                    }
+                    set(x, y) {
+                        this.x = x;
+                        this.y = y;
+                    }
+                    setVec2(other) {
+                        this.x = other.x;
+                        this.y = other.y;
+                    }
+                }
+          div
+            pre.small
+              code.language-javascript.
+                export default class Vec2 {
+                    x: number;
+                    y: number;
+                    
+                    constructor(x: number = 0, y: number = 0) {
+                        this.x = x;
+                        this.y = y;
+                    }
+                    set(x, y) {
+                        this.x = x;
+                        this.y = y;
+                    }
+                    setVec2(other: Vec2) {
+                        this.x = other.x;
+                        this.y = other.y;
+                    }
+                }
+                
+      section.medium
+        h1 syntax typescript
+        div.columns.small.text-align-left
+          pre.small
+            code.language-javascript.
+              export default class Vec2 {
+                  x: number;
+                  y: number;
+                  constructor(x: number = 0, y: number = 0) {
+                      this.x = x;
+                      this.y = y;
+                  }
+                  set(x, y) {
+                      this.x = x;
+                      this.y = y;
+                  }
+                  setVec2(other: Vec2) {
+                      this.x = other.x;
+                      this.y = other.y;
+                  }
               }
-            }
+          div(style="flex: 0.5").text-align-left.bullets
+            pre.small
+              code.language-javascript.
+                var v = new Vec2(1, '3');
+            div.error.
+              Argument of type '"3"' is not assignable to parameter of type 'number'.
+            pre.small
+              code.language-javascript.
+                v.set('a', 3);
+            div Geen error!
+            pre.small
+              code.language-javascript.
+                set(x: any, y: any) {
+                    this.x = x;
+                    this.y = y;
+                }
+        span
+              
+      section.medium
+        h1 Complexer voorbeeld
+        div.columns.small.text-align-left
+          div
+            pre.small
+              code.language-javascript.
+                class Swapper {
+                  
+                  constructor(options) {
+                    this.doParse = options.doParse;
+                    this.amount = options.amount;
+                  }
+                  
+                }
+          div.bullets
+            pre.small
+              code.language-javascript.
+                type Options = {
+                  doParse: boolean,
+                  options: number,
+                }
+                
+                class Swapper {
+                  
+                  constructor(options: Options) {
+                    this.doParse = options.doParse;
+                    this.amount = options.amount;
+                  }
+                  
+                }
+                
+      section.medium
+        h1 Complexer voorbeeld
+        div.columns.small.text-align-left
+          div
+            pre.small
+              code.language-javascript.
+                type Options = {
+                  doParse: boolean,
+                  amount: number,
+                }
+                
+                class Swapper {
+                  
+                  constructor(options: Options) {
+                    this.doParse = options.doParse;
+                    this.amount = options.amount;
+                  }
+                  
+                }
+          div(style="flex: 0.5").text-align-left.bullets
+            pre.small
+              code.language-javascript.
+                var swapper = new Swapper({
+                    doParse: false,
+                });
+            .small.error.
+              Argument of type '{ doParse: false; }' is not assignable to parameter of type 'Options'.
+              Property 'amount' is missing in type '{ doParse: false; }'.
+            pre.small
+              code.language-javascript.
+                type Options = {
+                  doParse: boolean,
+                  amount?: number,
+                }
+        span
       
       section
-        h4 Configuration: <i>gulpfile.js</i>
-        pre.small
-          code.language-javascript.
-            var gulp = require('gulp');
-            var less = require('gulp-less');
-            var concat = require('gulp-concat');
-            
-            gulp.task('less', function() {
-              gulp.src(['less/**/*.less'])
-                .pipe(less())
-                .pipe(concat('frontpage.css'))
-                .pipe(gulp.dest('compiled'));
-            });
+        h1 Libraries
+        h2 met bestaande typings
+        ul.text-align-left.bullets
+          li @types groep in npm
+          li 
+            code npm install @types/jquery
+          li 
+            pre.small
+              code.language-javascript.
+                class ToolRow {
+                  $elem: JQuery;
+                }
+        p
+      
+      section.medium
+        h1 Global libraries
+        p in global scope, via &lt;script&gt; tag
+        
+        .bullets
+          code.small //editor.ts:
+          pre.small
+            code.language-javascript.
+              declare global {
+                  interface Window {
+                      $: JQueryStatic,
+                      Modernizr: any,
+                      project: Project,
+                      exportPdf: {
+                          marginValue: number,
+                      },
+                  }
+                  interface JQuery {
+                      spectrum(cmd?: string, value?: any): JQuery;
+                  }
+              }
+          code.small //myfile.ts:
+          pre.small
+            code.language-javascript.
+              var Modernizr = window.Modernizr
+              // of
+              var {Modernizr, $} = window
+        span
       
       section
-        h1 Demo
-        <img src="https://raw.githubusercontent.com/gulpjs/artwork/master/gulp-2x.png" height="100px">
-      
-      section.bullet
-        h4.bullet Probleem: chrome inspector werkt niet goed meer
-        h2.bullet Oplossing: sourcemaps
-        pre.small.bullet
-          code.language-javascript.
-            var gulp = require('gulp');
-            var less = require('gulp-less');
-            var concat = require('gulp-concat');
-            var sourcemaps = require('gulp-sourcemaps');
-
-            gulp.task('less', function() {
-              gulp.src(['less/**/*.less'])
-                .pipe(sourcemaps.init())
-                  .pipe(less())
-                  .pipe(concat('frontpage.css'))
-                .pipe(sourcemaps.write('.'))
-                .pipe(gulp.dest('compiled'));
-            });
+        h1 Is het makkelijk?
+        ul.bullets
+          li 
+            b -
+          li externe libraries
+          li ingewikkelde constructies
+          li
+            b +
+          li incremental
         
       section
-        h1 Demo
-        <img src="https://raw.githubusercontent.com/gulpjs/artwork/master/gulp-2x.png" height="100px">
-            
-      section.bullet
-        h1.bullet LiveReload
-        pre.tiny.bullet
-          code.language-javascript.
-            var gulp = require('gulp');
-            var less = require('gulp-less');
-            var livereload = require('gulp-livereload');
-            var plumber = require('gulp-plumber');
-
-            gulp.task('less', function() {
-              gulp.src(['less/**/*.less'])
-                .pipe(plumber())
-                .pipe(less())
-                .pipe(gulp.dest('compiled'))
-              ;
-            });
-
-            gulp.task('livereload', function() {
-                livereload.listen();
-                gulp.watch('less/**/*.less', ['less']);
-                gulp.watch(['compiled/**/*.css'], livereload.reload);
-            });
+        h1 Is het nuttig?
+        ul.bullets
+          li 
+            b Vind lastige fouten
+          li Dubbele declaraties
+          li Ontbrekende parameters
+          li
+            b Autocomplete
+          li
+            b Refactoring
       
       section
-        h1 Demo
-        <img src="https://raw.githubusercontent.com/gulpjs/artwork/master/gulp-2x.png" height="100px">
-            
-      section
-        h1 Getting started
-        div.text-align-left
-          p Installeer node 
-            a(href="https://nodejs.org/download/") nodejs.org/download
-          p npm install --global gulp-cli
-          p frontwise-toolkit/js/Gulp
-          p npm install
-          p ./watch.sh of gulp watch
+        h1 JA!
+        ul.bullets
+          li Alleen voor grote codebases
+          li Alleen voor nieuwe projecten
       
       section
-        h1 Go Gulp!
-        img(src="images/big_gulp.jpg", alt="" height="300px")
-
+        h1 VS Code
+        ul
+          li Typescript hero
+          li
+            img(src="https://rbbit.gallerycdn.vsassets.io/extensions/rbbit/typescript-hero/1.5.0/1505847119420/Microsoft.VisualStudio.Services.Icons.Default")
+          li Sublime text keymap
+          
     script(src='build/build.js')

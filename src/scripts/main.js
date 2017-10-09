@@ -13,7 +13,7 @@ bespoke.from('article', [
   cube(),
   keys(),
   touch(),
-  bullets('li, .bullet'),
+  bullets('.bullets, .bullets > *, .bullet'),
   scale(),
   hash(),
   progress()

@@ -7,9 +7,13 @@
 @import 'prism/themes/prism-okaidia.css'
 // Check out "bower_components/prism/themes/" for available themes
 
+div.small,
+code.small
+    font-size 12px
+
 pre.small
     font-size 12px
-    padding 15px !important
+    padding 12px !important
     
 pre.small[class*="language-"]
     line-height 16px
@@ -31,3 +35,28 @@ pre.tiny[class*="language-"]
 .text-align-left {
     text-align left
 }
+
+section.medium
+    padding: 6px;
+    h1
+      font-size: 40px  
+      line-height: 50px
+
+.columns {
+    display: flex;
+    justify-content: center;
+    
+    > * {
+        margin-left: 6px;
+        margin-right: 6px;
+    }
+}
+
+.red 
+    color: #C62121
+    
+.error
+    color: #C62121
+    background-color: #CBCBCB
+    padding: 12px;
+    border-radius: 5px
